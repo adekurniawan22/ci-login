@@ -15,7 +15,6 @@
                                         <h1 class="h4 text-gray-900 mb-4">Login Account</h1>
                                     </div>
                                     <?= $this->session->flashdata('message'); ?>
-                                    <?= $this->session->sess_destroy(); ?>
                                     <form class="user" action="<?= base_url(); ?>auth" method="post">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"

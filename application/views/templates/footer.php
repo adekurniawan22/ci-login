@@ -54,7 +54,7 @@
             const roleId = $(this).data('role');
 
             $.ajax({
-                url: "<?= base_url();?>admin/changeaccess",
+                url: "<?= base_url();?>admin/changeAccess",
                 type: 'post',
                 data: {
                     menuId: menuId,
