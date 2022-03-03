@@ -16,18 +16,20 @@
                                     </div>
                                     <?= $this->session->flashdata('message'); ?>
                                     <?= $this->session->sess_destroy(); ?>
-                                    <form class="user">
+                                    <form class="user" action="<?= base_url(); ?>auth" method="post">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="email" aria-describedby="emailHelp" name="email"
-                                                placeholder="Enter Email Address...">
+                                                placeholder="Enter Email Address..." value="<?= set_value('email'); ?>">
+                                                <?= form_error('email','<small class="text-danger p-3">','</small>'); ?>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
                                                 id="password" name="password" placeholder="Password">
+                                                <?= form_error('password','<small class="text-danger p-3">','</small>'); ?>
                                         </div>
                                      
-                                        <button type="submit" href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>                                        
                                     </form>

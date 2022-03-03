@@ -9,10 +9,54 @@
         }
 
         public function index(){
-            $data['title'] = 'Login';
-            $this->load->view('templates/auth_header',$data);
-            $this->load->view('auth/login');
-            $this->load->view('templates/auth_footer');
+            $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+            $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[8]',[
+                'min_length' => 'Password to short!'
+            ]);
+            if($this->form_validation->run() == false){
+                $data['title'] = 'Login';
+                $this->load->view('templates/auth_header',$data);
+                $this->load->view('auth/login');
+                $this->load->view('templates/auth_footer');
+            }else{
+                $this->_login();
+            }
+        }
+
+        private function _login(){
+            $email = $this->input->post('email');
+            $password = $this->input->post('password');
+
+            $user = $this->db->get_where('user', ['email' => $email])->row_array();
+
+            if($user){
+                if($user['is_active'] == 1){
+                    if(password_verify($password,$user['password'])){
+                        $data = [
+                            'email' => $user['email'],
+                            '$role_id' => $user['role_id']
+                        ];
+
+                        $this->session->set_userdata($data);
+                        redirect('user');
+                    }else{
+                        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                                                                Your password wrong!
+                                                            </div>');
+                        redirect('auth');
+                    }
+                }else{
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                                                                Your data not acvtived!
+                                                            </div>');
+                    redirect('auth');
+                }
+            }else{
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                                                                Your data not found in database!
+                                                            </div>');
+                redirect('auth');
+            }
         }
 
         public function register(){
@@ -33,10 +77,10 @@
                 $this->load->view('templates/auth_footer');
             }else{
                 $data = [
-                    'name' => $this->input->post('name', true),
-                    'email' => $this->input->post('email', true),
+                    'name' => htmlspecialchars($this->input->post('name', true)),
+                    'email' => htmlspecialchars($this->input->post('email', true)),
                     'image' => "default.jpg",
-                    'password' => password_hash($this->input->post('password1', true), PASSWORD_DEFAULT),
+                    'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                     'role_id' => 2,
                     'is_active' => 1,
                     'date_created' => time()
@@ -49,6 +93,15 @@
                 redirect('auth');
             }
             
+        }
+
+        public function logout(){
+            $this->session->unset_userdata('email');
+            $this->session->unset_userdata('role_id');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                                                                Your account has been logged out!
+                                                            </div>');
+            redirect('auth');
         }
     }
 
