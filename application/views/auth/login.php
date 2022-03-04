@@ -12,7 +12,7 @@
                             <div class="col-lg">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Login Account</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Sign In</h1>
                                     </div>
                                     <?= $this->session->flashdata('message');
                                         unset($_SESSION['message']); ?>
@@ -20,7 +20,7 @@
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="email" aria-describedby="emailHelp" name="email"
-                                                placeholder="Enter Email Address..." value="<?= set_value('email'); ?>">
+                                                placeholder="Email Address" value="<?= set_value('email'); ?>">
                                                 <?= form_error('email','<small class="text-danger p-3">','</small>'); ?>
                                         </div>
                                         <div class="form-group">
