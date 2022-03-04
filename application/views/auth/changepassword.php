@@ -15,7 +15,8 @@
                                 <h1 class="h4 text-gray-900 ">Change your password</h1>
                                 <h5 class="mb-4"><?= $this->session->userdata('reset_email'); ?></h5>
                             </div>
-                            <?= $this->session->flashdata('message'); ?>
+                            <?= $this->session->flashdata('message');
+                                unset($_SESSION['message']);; ?>
                             <form class="user" action="<?= base_url(); ?>auth/changepassword" method="post">
                                 <div class="form-group">
                                     <input type="password" class="form-control form-control-user"

@@ -3,7 +3,7 @@
         <h1 class="h3 mb-4 text-gray-800"><?= $title ;?></h1>      
             <?= form_error('menu', '<div class="alert alert-danger col-3" role="alert">','</div>');?> 
             <?= $this->session->flashdata('message');
-                            unset($_SESSION['message']); ?>
+                unset($_SESSION['message']); ?>
         <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newRoleModal">Add new Role</a>
         <div class="row">
             <div class="col-lg-6">

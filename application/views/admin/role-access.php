@@ -2,7 +2,7 @@
 
         <h1 class="h3 mb-4 text-gray-800"><?= $title ;?></h1>      
             <?= $this->session->flashdata('message');
-                unset($_SESSION['message']);; ?>
+                unset($_SESSION['message']); ?>
             <h5>Role : <?= $role['role']?></h5>
         <div class="row">
             <div class="col-lg-6">

@@ -3,7 +3,8 @@
     <h1 class="h3 mb-4 text-gray-800"><?= $title ;?></h1>
     <div class="row">
         <div class="col-lg-6">
-        <?= $this->session->flashdata('message'); ?>
+        <?= $this->session->flashdata('message');
+            unset($_SESSION['message']); ?>
             <form action="<?= base_url('user/changepassword');?>" method="post">
                 <div class="form-group">
                     <label for="currentPassword">Current Password</label>
