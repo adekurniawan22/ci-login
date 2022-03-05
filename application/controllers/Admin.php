@@ -44,7 +44,21 @@
         }
 
         public function editrole(){
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('user_role',['role' => $this->input->post('role')]);
+            $this->session->set_flashdata('message', '<div class=" col-3 alert alert-success" role="alert">
+                                                                Role Updated!
+                                                            </div>');
+            redirect('admin/role');
+        }
 
+        public function deleterole(){
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->delete('user_role');
+            $this->session->set_flashdata('message', '<div class=" col-3 alert alert-success" role="alert">
+                                                                Role Deleted!
+                                                            </div>');
+            redirect('admin/role');
         }
 
         public function roleAccess($role_id){

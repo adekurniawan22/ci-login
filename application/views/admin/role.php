@@ -23,8 +23,8 @@
                         <td><?= $r['role'] ?></td>
                         <td>
                             <a href="<?= base_url('admin/roleAccess/') . $r['id'] ; ?>" class="badge badge-warning">Role acces</a>
-                            <a href="" class="badge badge-success" data-toggle="modal" data-target="#editMenu<?= $r['id'];?>">Edit</a>
-                            <a href="" class="badge badge-danger" data-toggle="modal" data-target="#deleteMenu<?= $r['id'];?>">Delete</a>
+                            <a href="" class="badge badge-success" data-toggle="modal" data-target="#editRole<?= $r['id'];?>">Edit</a>
+                            <a href="" class="badge badge-danger" data-toggle="modal" data-target="#deleteRole<?= $r['id'];?>">Delete</a>
                         </td>
                     </tr> 
                     <?php endforeach; ?>
@@ -62,18 +62,18 @@
 
 <!-- Modal Update -->
 <?php foreach($role as $a) : ?>
-<div class="modal fade" id="editMenu<?= $a['id'] ?>" tabindex="-1" aria-labelledby="updateMenuLabel" aria-hidden="true">
+<div class="modal fade" id="editRole<?= $a['id'] ?>" tabindex="-1" aria-labelledby="updateMenuLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="updateMenuLabel">Hapus Menu</h5>
+        <h5 class="modal-title" id="updateMenuLabel">Update Menu</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
-      <form action="<?= base_url(); ?>menu/edit" method="post">
+      <form action="<?= base_url('admin/editrole'); ?>" method="post">
             <div class="modal-body">
                     <div class="form-group">
                         <input type="hidden" name="id" value="<?= $a['id'] ?>">
-                        <input type="text" id="menu" name="menu" class="form-control" value="<?= $a['role'] ?>">
+                        <input type="text" id="role" name="role" class="form-control" value="<?= $a['role'] ?>" required>
                     </div>
             </div>     
       <div class="modal-footer">
@@ -88,21 +88,21 @@
 
 <!-- Modal delete -->
 <?php foreach($role as $a) : ?>
-<div class="modal fade" id="deleteMenu<?= $a['id'] ?>" tabindex="-1" aria-labelledby="updateMenuLabel" aria-hidden="true">
+<div class="modal fade" id="deleteRole<?= $a['id'] ?>" tabindex="-1" aria-labelledby="updateMenuLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Hapus Menu</h5>
+        <h5 class="modal-title">Delete Role</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-        <p>Apakah kamu yakin ingin menghapus menu ini?</p>
+        <p>Are you sure to delete this role?</p>
       </div>
-      <form action="<?= base_url(); ?>menu/delete" method="post">
+      <form action="<?= base_url(); ?>admin/deleterole" method="post">
       <div class="modal-footer" method="post">
         <input type="hidden" name="id" value="<?= $a['id'] ?>">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Yes. Delete</button>
       </div>
       </form>
     </div>
