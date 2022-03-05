@@ -64,6 +64,14 @@
                 }
             });
         });
+
+        $('.cekaktive').click(function(){
+            if($('.cekaktive').val()== 1){
+            $('.cekaktive').attr("checked")
+            }else{
+            $('.cekaktive').removeAttr("checked")
+            }
+        })
     </script>
     
 

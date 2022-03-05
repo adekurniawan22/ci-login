@@ -32,8 +32,8 @@
                         <td><?= $m['icon'] ?></td>
                         <td><?= $m['is_active'] ?></td>
                         <td>
-                            <a href="<?= base_url(); ?>menu/edit/<?= $m['id'] ?>" class="badge badge-success" data-toggle="modal" data-target="#editMenu<?= $m['id'];?>">Edit</a>
-                            <a href="<?= base_url(); ?>menu/delete/<?= $m['id'] ?>" class="badge badge-danger" data-toggle="modal" data-target="#deleteMenu<?= $m['id'];?>">Delete</a>
+                            <a href="" class="badge badge-success" data-toggle="modal" data-target="#editSubMenu<?= $m['id'];?>">Edit</a>
+                            <a href="" class="badge badge-danger" data-toggle="modal" data-target="#deleteSubMenu<?= $m['id'];?>">Delete</a>
                         </td>
                     </tr> 
                     <?php endforeach; ?>
@@ -91,18 +91,50 @@
 
 <!-- Modal Update -->
 <?php foreach($subMenu as $a) : ?>
-<div class="modal fade" id="editMenu<?= $a['id'] ?>" tabindex="-1" aria-labelledby="updateMenuLabel" aria-hidden="true">
+<div class="modal fade" id="editSubMenu<?= $a['id'] ?>" tabindex="-1" aria-labelledby="updateMenuLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="updateMenuLabel">Hapus Menu</h5>
+        <h5 class="modal-title" id="updateMenuLabel">Update Menu</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
-      <form action="<?= base_url(); ?>menu/edit" method="post">
+      <form action="<?= base_url(); ?>menu/updatesubmenu" method="post">
             <div class="modal-body">
                     <div class="form-group">
-                        <input type="hidden" name="id" value="<?= $a['id'] ?>">
-                        <input type="text" id="menu" name="menu" class="form-control" value="<?= $a['menu'] ?>">
+                      <input type="hidden" name="id" value="<?= $a['id'] ?>">
+                        <input type="text" id="title" name="title" value="<?= $a['title'] ?>"class="form-control" placeholder="Sub Menu Name..">
+                    </div>
+                    <div class="form-group">
+                        <select name="menu_id" id="menu_id" class="form-control">
+                            <option value="">Select Menu</option>
+                            <?php foreach($menu as $m) : ?>
+                              <?php if($m['id']==$a['menu_id']) :?>
+                                <option value="<?= $m['id'] ?>" selected><?= $m['menu'] ?></option>
+                                <?php else :;?>
+                                <option value="<?= $m['id'] ?>"><?= $m['menu'] ?></option>
+                              <?php endif;?> 
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="url" name="url" value="<?= $a['url'] ?>" class="form-control" placeholder="Sub Menu URL..">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="icon" name="icon" value="<?= $a['icon'] ?>" class="form-control" placeholder="Sub Menu Icon..">
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="is_active" id="is_active" required value="1">
+                          <label class="form-check-label">
+                            Active
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="is_active" id="is_active" value="0">
+                          <label class="form-check-label">
+                            No Active
+                          </label>
+                        </div>
                     </div>
             </div>     
       <div class="modal-footer">

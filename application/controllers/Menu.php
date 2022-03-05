@@ -82,6 +82,20 @@
             }
     
         }
+
+        public function updatesubmenu(){
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->update('user_sub_menu',[
+                                            'title' => $this->input->post('title'),
+                                            'menu_id' => $this->input->post('menu_id'),
+                                            'url' => $this->input->post('url'),
+                                            'icon' => $this->input->post('icon'),
+                                            'is_active' => $this->input->post('is_active')]);
+            $this->session->set_flashdata('message', '<div class=" col-3 alert alert-success" role="alert">
+                                                                Sub Menu Updated!
+                                                            </div>');
+            redirect('menu/submenu');
+        }
     }
 
     
