@@ -45,7 +45,8 @@
       <form action="<?= base_url(); ?>menu" method="post">
             <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" id="menu" name="menu" class="form-control">
+                        <input type="text" id="menu" name="menu" class="form-control" required>
+                        <?= form_error('menu','<small class="text-danger p-3">','</small>'); ?>
                     </div>
             </div>     
       <div class="modal-footer">
@@ -70,7 +71,8 @@
             <div class="modal-body">
                     <div class="form-group">
                         <input type="hidden" name="id" value="<?= $a['id'] ?>">
-                        <input type="text" id="menu" name="menu" class="form-control" value="<?= $a['menu'] ?>">
+                        <input type="text" id="menu" name="menu" class="form-control" value="<?= $a['menu'] ?>" required>
+                        <?= form_error('menu','<small class="text-danger p-3">','</small>'); ?>
                     </div>
             </div>     
       <div class="modal-footer">

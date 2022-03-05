@@ -74,6 +74,7 @@
                     <div class="form-group">
                         <input type="hidden" name="id" value="<?= $a['id'] ?>">
                         <input type="text" id="role" name="role" class="form-control" value="<?= $a['role'] ?>" required>
+                        <?= form_error('role','<small class="text-danger p-3">','</small>'); ?>
                     </div>
             </div>     
       <div class="modal-footer">
