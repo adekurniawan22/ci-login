@@ -41,13 +41,14 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="newRoleModalLabel">Add Menu</h5>
+        <h5 class="modal-title" id="newRoleModalLabel">Add Role</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <form action="<?= base_url(); ?>admin/role" method="post">
             <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" id="role" name="role" class="form-control">
+                        <input type="text" id="role" name="role" class="form-control" required>
+                        <?= form_error('role','<small class="text-danger p-3">','</small>'); ?>
                     </div>
             </div>     
       <div class="modal-footer">
@@ -72,12 +73,12 @@
             <div class="modal-body">
                     <div class="form-group">
                         <input type="hidden" name="id" value="<?= $a['id'] ?>">
-                        <input type="text" id="menu" name="menu" class="form-control" value="<?= $a['menu'] ?>">
+                        <input type="text" id="menu" name="menu" class="form-control" value="<?= $a['role'] ?>">
                     </div>
             </div>     
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary" >Update</button>
         </form>
       </div>
     </div>

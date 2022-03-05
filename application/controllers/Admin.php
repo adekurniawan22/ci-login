@@ -8,19 +8,16 @@
             is_logged_in();
         }
 
-        public function index(){
-            if($this->session->userdata('email')== null){
-                redirect('auth');
-            }else{
-                $data['title'] = "Dashboard";
-                $data['user'] = $this->db->get_where('user',['email' => $this->session->userdata('email')])->row_array();
+        public function index(){   
+            $data['title'] = "Dashboard";
+            $data['user'] = $this->db->get_where('user',['email' => $this->session->userdata('email')])->row_array();
 
-                $this->load->view('templates/header', $data);
-                $this->load->view('templates/sidebar', $data);
-                $this->load->view('templates/topbar', $data);
-                $this->load->view('admin/index', $data);
-                $this->load->view('templates/footer', $data);
-            }
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/index', $data);
+            $this->load->view('templates/footer', $data);
+        
             ;
         }
         
@@ -28,12 +25,26 @@
             $data['title'] = "Role";
             $data['user'] = $this->db->get_where('user',['email' => $this->session->userdata('email')])->row_array();
             $data['role'] = $this->db->get('user_role')->result_array();
+            
+            $this->form_validation->set_rules('role','Role','required');
 
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/role', $data);
-            $this->load->view('templates/footer');
+            if($this->form_validation->run() == false){
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/sidebar', $data);
+                $this->load->view('templates/topbar', $data);
+                $this->load->view('admin/role', $data);
+                $this->load->view('templates/footer');
+            }else{
+                $this->db->insert('user_role',['role'=> $this->input->post('role')]);
+                $this->session->set_flashdata('message', '<div class=" col-3 alert alert-success" role="alert">
+                                                                New Role Added!
+                                                            </div>');
+                redirect('admin/role');
+            }
+        }
+
+        public function editrole(){
+
         }
 
         public function roleAccess($role_id){
