@@ -96,6 +96,15 @@
                                                             </div>');
             redirect('menu/submenu');
         }
+
+        public function deletesubmenu(){
+            $this->db->where('id', $this->input->post('id'));
+            $this->db->delete('user_sub_menu');
+            $this->session->set_flashdata('message', '<div class=" col-3 alert alert-success" role="alert">
+                                                                Sub Menu Deleted!
+                                                            </div>');
+            redirect('menu/submenu');
+        }
     }
 
     

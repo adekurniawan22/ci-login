@@ -17,8 +17,8 @@
                         <th scope="col">Menu</th>
                         <th scope="col">URL</th>
                         <th scope="col">Icon</th>
-                        <th scope="col">Status active</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" class="text-center">Status active</th>
+                        <th scope="col" class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,7 +30,7 @@
                         <td><?= $m['menu'] ?></td>
                         <td><?= $m['url'] ?></td>
                         <td><?= $m['icon'] ?></td>
-                        <td><?= $m['is_active'] ?></td>
+                        <td class="text-center"><?= $m['is_active'] ?></td>
                         <td>
                             <a href="" class="badge badge-success" data-toggle="modal" data-target="#editSubMenu<?= $m['id'];?>">Edit</a>
                             <a href="" class="badge badge-danger" data-toggle="modal" data-target="#deleteSubMenu<?= $m['id'];?>">Delete</a>
@@ -56,7 +56,7 @@
       <form action="<?= base_url(); ?>menu/submenu" method="post">
             <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" id="title" name="title" class="form-control" placeholder="Sub Menu Name..">
+                        <input type="text" id="title" name="title" class="form-control" placeholder="Sub Menu Name">
                     </div>
                     <div class="form-group">
                         <select name="menu_id" id="menu_id" class="form-control">
@@ -68,10 +68,10 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="text" id="title" name="url" class="form-control" placeholder="Sub Menu URL..">
+                        <input type="text" id="title" name="url" class="form-control" placeholder="Sub Menu URL">
                     </div>
                     <div class="form-group">
-                        <input type="text" id="title" name="icon" class="form-control" placeholder="Sub Menu Icon..">
+                        <input type="text" id="title" name="icon" class="form-control" placeholder="Sub Menu Icon">
                     </div>
                     <div class="form-group">
                         <div class="ml-2 form-check">
@@ -102,10 +102,10 @@
             <div class="modal-body">
                     <div class="form-group">
                       <input type="hidden" name="id" value="<?= $a['id'] ?>">
-                        <input type="text" id="title" name="title" value="<?= $a['title'] ?>"class="form-control" placeholder="Sub Menu Name..">
+                        <input type="text" id="title" name="title" value="<?= $a['title'] ?>"class="form-control" placeholder="Sub Menu Name" required>
                     </div>
                     <div class="form-group">
-                        <select name="menu_id" id="menu_id" class="form-control">
+                        <select name="menu_id" id="menu_id" class="form-control" required>
                             <option value="">Select Menu</option>
                             <?php foreach($menu as $m) : ?>
                               <?php if($m['id']==$a['menu_id']) :?>
@@ -117,10 +117,10 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="text" id="url" name="url" value="<?= $a['url'] ?>" class="form-control" placeholder="Sub Menu URL..">
+                        <input type="text" id="url" name="url" value="<?= $a['url'] ?>" class="form-control" placeholder="Sub Menu URL" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" id="icon" name="icon" value="<?= $a['icon'] ?>" class="form-control" placeholder="Sub Menu Icon..">
+                        <input type="text" id="icon" name="icon" value="<?= $a['icon'] ?>" class="form-control" placeholder="Sub Menu Icon" required>
                     </div>
                     <div class="form-group">
                         <div class="form-check">
@@ -149,21 +149,21 @@
 
 <!-- Modal delete -->
 <?php foreach($subMenu as $a) : ?>
-<div class="modal fade" id="deleteMenu<?= $a['id'] ?>" tabindex="-1" aria-labelledby="updateMenuLabel" aria-hidden="true">
+<div class="modal fade" id="deleteSubMenu<?= $a['id'] ?>" tabindex="-1" aria-labelledby="updateMenuLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Hapus Menu</h5>
+        <h5 class="modal-title">Delete Menu</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-        <p>Apakah kamu yakin ingin menghapus menu ini?</p>
+        <p>Are you sure to delete this sub menu?</p>
       </div>
-      <form action="<?= base_url(); ?>menu/delete" method="post">
+      <form action="<?= base_url(); ?>menu/deletesubmenu" method="post">
       <div class="modal-footer" method="post">
         <input type="hidden" name="id" value="<?= $a['id'] ?>">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Yes, Delete</button>
       </div>
       </form>
     </div>
